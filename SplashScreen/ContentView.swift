@@ -11,9 +11,11 @@ struct ContentView: View {
     @State private var showDotAnimation: Bool = false
     
     var body: some View {
-        HStack {
-            TypingTextView(fullText: "Hello World",
-                           typingCompleted: $showDotAnimation)
+        HStack(alignment: .lastTextBaseline) {
+            if !showDotAnimation {
+                TypingTextView(fullText: "Hello World",
+                               typingCompleted: $showDotAnimation)
+            }
             
             ExpandingDotView(isExpanded: $showDotAnimation)
         }

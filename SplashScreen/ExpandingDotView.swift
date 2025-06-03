@@ -12,28 +12,14 @@ struct ExpandingDotView: View {
     @Binding var isExpanded: Bool
     
     var body: some View {
-        ZStack {
-            if isExpanded {
-                Color.red
-                    .matchedGeometryEffect(id: "dot", in: animation)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                            isExpanded = false
-                        }
-                    }
-            } else {
-                Circle()
-                    .fill(Color.red)
-                    .frame(width: 30, height: 30)
-                    .matchedGeometryEffect(id: "dot", in: animation)
-                    .onTapGesture {
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                            isExpanded = true
-                        }
-                    }
-            }
-        }
+        Circle()
+            .fill(
+                LinearGradient(gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]), startPoint: .zero, endPoint: .bottom)
+            )
+            .scaleEffect(isExpanded ? 200 : 1)
+            .animation(.easeInOut(duration: 1.5), value: isExpanded)
+            .frame(width: 10, height: 10)
+            .ignoresSafeArea()
     }
 }
 
